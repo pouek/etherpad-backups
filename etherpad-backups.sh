@@ -1,6 +1,6 @@
 #!/bin/bash
 # Incremental backuping of all your etherpads
-# Using 
+# Using symbolic links to free storage space
 # Adapt $user and $W_DIR 1st, and if you move to new home
 # Passing "update" as an argument will force updating
 
