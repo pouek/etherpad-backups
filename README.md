@@ -13,4 +13,4 @@ The code is documented, read it ;)
 
 # To-do
 - add a way to delete useless symlinks
-- add connection to server with email:password ?
+- add connection to server with login:password ?
