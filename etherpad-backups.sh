@@ -37,8 +37,9 @@ PRV_DATE=$(tail -n1 $LOG_FILE | cut -c -10)
 NEW_SUFX="_${DATE}.odt"
 continue="y"
 
-# This function links to older version if they are the same (and delete useless files)
-# Requires odt2txt installed
+# This function links to older version if they are the same
+# Requires odt2txt installed to compare odt backups
+# To-do add a nice way to delete junk symlinks, working on it...
 cmpToLn(){
 old=$(ls -t|head -n2|tail -n1)
 new=$(ls -t|head -n1)
@@ -84,8 +85,8 @@ if [ "$continue" != "n" ] && [ "$continue" != "N" ]; then
 	    cd $pad
 	    wget "${server}${pad}/export/${type}" --content-disposition
 	    mv "${pad}.odt" "${pad}""${NEW_SUFX}"
-	    # Working on a way to delete useless links to links to links ... Uncomment to test, develop, ...
-	    #cmpToLn
+	    # Compare previous with new backup, keep that lasr one only if different
+	    cmpToLn
 	    # link new pad in latest_pads folder
 	    if [ ! -d ${LATEST} ]; then mkdir ${LATEST};fi
 	    ln -fs "${W_DIR}""${pad}"/"${pad}""${NEW_SUFX}" "${LATEST}""${pad}".odt && echo "$pad linked in $LATEST"
