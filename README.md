@@ -3,8 +3,8 @@ Script to backup your favorite public pads, hosted on any etherpad instances, au
 
 # Usage
 - Edit the script with all your settings
-- Add the script to your anacrontab to enable automatic backups of your etherpads
-  (if you need to backup from different servers, make and call a different script for each server and its pads) 
+- To backup from different servers, create one more script for each one 
+- Add the script(s) to your anacrontab to enable automatic backups of your etherpads
 - Manually update your pads when you need
 
 # More details
