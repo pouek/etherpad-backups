@@ -1,5 +1,5 @@
 # etherpad-backups
-Script to backup your favorite public pads, hosted on any [etherpad](https://etherpad.org/) instances, automagically !
+Shell script to backup your favorite public pads, hosted on any [etherpad](https://etherpad.org/) instances, automagically !
 
 # Features
 - It can be used by anyone, i.e. without admin rights or any logins, to archive (regularly or not) your favorite pads.
