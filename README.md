@@ -22,7 +22,7 @@ Script to backup your favorite public pads, hosted on any [etherpad](https://eth
 - Manually update your pads when you need
 
 # More details
-The code is documented, read it ;)
+The code is documented, [read it](https://github.com/pouek/etherpad-backups/blob/main/etherpad-backups.sh) ;)
 
 
 # To-do
