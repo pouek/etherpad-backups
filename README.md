@@ -9,8 +9,10 @@ Script to backup your favorite public pads, hosted on any etherpad instances, au
 - To preserve disk space, if nothing has changed, it will replace the downloaded pad by a link to the previous backup.
 
 - Examples of etherpad servers, so you know where you can download with this tool from :
-    -• https://framapad.org and its subdomains [annuel](https://annuel.framapad.org), [mensuel](https://mensuel.framapad.org), ...
-    -• More instances [listed on chatons.org](https://www.chatons.org/search/by-service?service_type_target_id=All&field_alternatives_aux_services_target_id=All&field_software_target_id=224&field_is_shared_value=All&title=) 
+
+• https://framapad.org and its subdomains [annuel](https://annuel.framapad.org), [mensuel](https://mensuel.framapad.org), ...
+
+• More instances [listed on chatons.org](https://www.chatons.org/search/by-service?service_type_target_id=All&field_alternatives_aux_services_target_id=All&field_software_target_id=224&field_is_shared_value=All&title=) 
 
 
 # Usage
