@@ -34,7 +34,7 @@ LOG_FILE="${W_DIR}bakup-pads.log"
 touch "$LOG_FILE"
 export DATE="$(date '+%Y-%m-%d')"
 PRV_DATE=$(tail -n1 $LOG_FILE | cut -c -10)
-NEW_SUFX="_${DATE}.odt"
+NEW_SUFX="_${DATE}.${type}"
 continue="y"
 
 # This function links to older version if they are the same
@@ -84,7 +84,7 @@ if [ "$continue" != "n" ] && [ "$continue" != "N" ]; then
 	    if [ ! -d $pad ]; then mkdir $pad;fi
 	    cd $pad
 	    wget "${server}${pad}/export/${type}" --content-disposition
-	    mv "${pad}.odt" "${pad}""${NEW_SUFX}"
+	    mv "${pad}.${type}" "${pad}""${NEW_SUFX}"
 	    # Compare previous with new backup, keep that lasr one only if different
 	    cmpToLn
 	    # link new pad in latest_pads folder
@@ -99,7 +99,7 @@ else
 fi
 
 # Give file ownership to user, useful if started by anacron/cron
-sudo chown $USER:$USER -R $W_DIR
+sudo chown $u:$u -R $W_DIR
 
 ## Log / echo ?
 #if [ "$PRV_DATE" != "$DATE" ]; then echo "$DATE : $mode donwloads complete !" >> ${LOG_FILE};fi
