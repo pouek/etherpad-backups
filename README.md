@@ -13,7 +13,7 @@ Shell script to backup your favorite public pads, hosted on any [etherpad](https
     - More instances [listed on chatons.org](https://www.chatons.org/search/by-service?service_type_target_id=All&field_alternatives_aux_services_target_id=All&field_software_target_id=224&field_is_shared_value=All&title=) 
 
 # Install
-- [Click here to download zip](https://github.com/pouek/etherpad-archives/archive/refs/heads/main.zip).
+- [Click here to download zip](https://github.com/pouek/etherpad-backups/archive/refs/heads/main.zip).
 - Extract, launch, enjoy
   
 # Usage
