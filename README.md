@@ -20,14 +20,26 @@ Shell script to backup your favorite public pads, hosted on any [etherpad](https
    - Download folder path
    - Server to download from
    - Pads names to download
+- Make the script executable with
+  ```
+  chmod u+x etherpad-backups.sh
+  ```
 - To backup from different servers, create one more script for each one 
 - Add the script(s) to your anacrontab to enable automatic backups of your etherpads
-- Manually update your pads when you need
+- Manually update your pads when you need with :
+```
+./etherpad-backups.sh
+```
+or
+```
+/full/path/to/etherpad-backups.sh
+```
 
 # More details
 The code is documented, [read it](https://github.com/pouek/etherpad-backups/blob/main/etherpad-backups.sh) ;)
 
 
 # To-do
+- ability to download from multiple {server+pads} groups
 - add a way to delete useless symlinks
-- add connection to server with login:password ?
+- add connection to server with login:password for private pads ?
