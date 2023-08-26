@@ -16,7 +16,12 @@ Shell script to backup your favorite public pads, hosted on any [etherpad](https
 
 
 # Usage
-- Edit the script with all your settings
+- Edit the script with all your settings :
+   - Filetype to download : "odt" or "pdf"
+   - Username, mandatory if script started by cron/anacron
+   - Download folder path
+   - Server to download from
+   - Pads names to download
 - To backup from different servers, create one more script for each one 
 - Add the script(s) to your anacrontab to enable automatic backups of your etherpads
 - Manually update your pads when you need
