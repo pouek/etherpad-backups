@@ -28,15 +28,24 @@ Shell script to backup your favorite public pads, hosted on any [etherpad](https
   chmod u+x etherpad-backups.sh
   ```
 - To backup from different servers, create one more script for each one 
-- Add the script(s) to your anacrontab to enable automatic backups of your etherpads
 - Manually update your pads when you need with :
+_Note : the manual parameter can be what you want, it is an option to help track which backups were made and when_
 ```
-./etherpad-backups.sh
+./etherpad-backups.sh manual
 ```
 or
 ```
-/full/path/to/etherpad-backups.sh
+/full/path/to/etherpad-backups.sh manual
 ```
+
+## Add the script(s) to your cron to enable automatic backups of your etherpads
+__Install Anacrontab to your system, so it also backup the next day you power on your pc, in case you didn't the day cron was supposed to do the backup.__
+_Example file to be at /etc/cron.weekly/pad (or "/etc/cron.monthly/pad" ...)__ 
+```
+#!/bin/bash
+/bin/bash /home/path/to/incr_backup.sh automatic
+```
+
 
 # More details
 The code is documented, [read it](https://github.com/pouek/etherpad-backups/blob/main/etherpad-backups.sh) ;)
