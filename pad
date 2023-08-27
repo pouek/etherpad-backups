@@ -1,0 +1,6 @@
+#!/bin/bash
+## Add this file in /etc/cron.weekly/ or /etc/cron/monthly, etc.
+## Customize your scripts' path.
+## You can install anacrontab so it also download at next power up if 
+## the pc wasn't on on the planned day.
+/bin/bash /home/path/to/your/incr_backup.sh automatic
