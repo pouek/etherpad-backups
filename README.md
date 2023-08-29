@@ -1,3 +1,5 @@
+/!\ Unstable state suspected, may not work as intended. A fix (and big update) is coming.. /!\ 
+
 # etherpad-backups
 Shell script to backup your favorite public pads, hosted on any [etherpad](https://etherpad.org/) instance, automagically !
 
