@@ -1,4 +1,5 @@
-/!\ Unstable state suspected, may not work as intended. A fix (and big update) is coming.. /!\ 
+__/!\ Unstable state suspected, may not work as intended. A fix (and big update) is coming.. /!\__
+_(..probably tomorrow, if not certainly before end of week)_
 
 # etherpad-backups
 Shell script to backup your favorite public pads, hosted on any [etherpad](https://etherpad.org/) instance, automagically !
