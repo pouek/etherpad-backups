@@ -1,7 +1,3 @@
-__/!\ Unstable state suspected, may not work as intended. A fix (and big update) is coming.. /!\\__
-
-_(..probably tomorrow, if not certainly before end of week)_
-
 # etherpad-backups
 Shell script to backup your favorite public pads, hosted on any [etherpad](https://etherpad.org/) instance, automagically !
 
@@ -52,7 +48,7 @@ _to be placed at /etc/cron.weekly/pad (or "/etc/cron.monthly/pad" ...)_
 Minimal code :
 ```
 #!/bin/bash
-/bin/bash /home/path/to/incr_backup.sh automatic
+/bin/bash /home/path/to/etherpad-backups.sh automatic
 ```
 
 
