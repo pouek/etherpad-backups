@@ -40,9 +40,7 @@ or
 ## Add the script(s) to your cron to enable automatic backups of your etherpads
 __Install Anacrontab to your system, so it also backup the next day you power on your pc, in case you didn't the day cron was supposed to do the backup.__
 
-[Example file](https://github.com/pouek/etherpad-backups/blob/main/pad)
-
-_to be placed at /etc/cron.weekly/pad (or "/etc/cron.monthly/pad" ...)_
+[Example file](https://github.com/pouek/etherpad-backups/blob/main/pad) to be placed at /etc/cron.weekly/pad (or "/etc/cron.monthly/pad" ...)
 
 Minimal code :
 ```
