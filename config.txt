@@ -1,0 +1,38 @@
+#!/bin/bash
+# yeah it's not a script, but it helps readability 
+# with colors in code editors...
+#### User config : EDIT ME ! ####
+# Your sources are stored in an associative array.
+# In shell we assign it with "array[key]=value"
+# Each element in that array stores a name and a
+# space-separated "server" + "pads" lists, hence the name "serpads".
+# It must be called "serpads[server-name]" where server-name is a name
+# you chose and that corresponds to the server, and will be the name 
+# of the folder storing its pads in their own subfolders.
+# The 1st strig must be the complete server address ending with /p/, and
+# the other ones are the different pads you want to backup from that server.
+# Examples : ['example_server']="https://example-server.org/p/ pad1 example2"
+#  			 ['other-server']="https://other-server.org/p/ 1dap exampleZ"
+declare -A serpads=(
+	['example_server']="https://example-server.org/p/ pad1 example2"
+	['other-server']="https://other-server.org/p/ 1dap exampleZ"
+)
+# Filetype needed : "odt" or "pdf"
+type="odt"
+# Enable or disable symbolic links. 
+# Useful if can't/won't get "odt2txt".
+# Default : yes <>  symbolic links
+#			no  <> always keep new files
+#					# takes more disk space
+symlinks="yes"
+# Default, only set to no in case no odt2txt command available 
+txtable="yes"
+# Replace by real username if start by cron/anacron
+u=$USER
+# Paths, adapt as you wish
+# /!\ keep the ending '/' !
+W_DIR="$PWD"/
+# Latest folder, to always have all your new version at hand !
+# ( The missing '/' is already in ${W_DIR} )
+LATEST="${W_DIR}latest/"
+#### End of user config ####
