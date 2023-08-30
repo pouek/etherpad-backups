@@ -20,8 +20,8 @@ Shell script to backup your favorite public pads, hosted on any [etherpad](https
    - Filetype to download : "odt" or "pdf"
    - Username, mandatory if script started by cron/anacron
    - Download folder path
-   - Server to download from
-   - Pads names to download
+   - Servers to download from, and for each server...
+   - Pads names to download it from
 - Make the script executable with
   ```
   chmod u+x etherpad-backups.sh
