@@ -57,6 +57,4 @@ The code is documented, [read it](https://github.com/pouek/etherpad-backups/blob
 
 
 # To-do
-- ability to download from multiple {server+pads} groups
-- add a way to delete useless symlinks
 - add connection to server with login:password for private pads ?
