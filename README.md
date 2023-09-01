@@ -5,7 +5,7 @@ Shell script to backup your favorite public pads, from [etherpad](https://etherp
 
 English read me below
 
-#Caractéristiques
+# Caractéristiques
 
 Il peut être utilisé par n'importe qui, c'est-à-dire sans droits d'administration ou identifiants, pour archiver (régulièrement ou non) vos pads préférés.
 Le nom du fichier sauvegardé est fait du nom du pad suivi de la date. Cela vous permet de suivre l'évolution de vos pads.
@@ -29,12 +29,12 @@ _Nom d'utilisateur_, obligatoire si script a commencé par cron/anacron
 _Dossier de téléchargement_
 _Les serveurs_ à télécharger, et pour chaque serveur...
 Les _noms de Pads_ pour le télécharger depuis
-Lancez le script avec
+Lancer le script avec
 ```
 chmod u+x etherpad-backups.sh
 ```
-Mettrez à jour manuellement vos pads, donc ponctuellement.
-Note : le paramètre _manuel_ peut être ce que vous voulez, c'est une option pour aider à suivre les sauvegardes effectuées et quand elles l'ont été
+Mettre à jour manuellement les pads, donc ponctuellement.
+Note : le paramètre _manuel_ peut être modifié au choix, c'est une option pour aider à suivre les effectuées.
 ```
 ./etherpad-backups.sh manuel
 ```
@@ -42,9 +42,9 @@ ou
 ```
 /chemin/complet/vers/etherpad-backups.sh manuel
 ```
-Ajoutez les scripts à votre _cron_ pour activer les sauvegardes automatiques de vos _etherpads_.
+Ajouter les scripts à _cron_ pour activer les sauvegardes automatiques définies dans le script ou le fichier _config.txt_ .
 
-Installez _Anacrontab_ dans votre système, pour qu'il sauvegarde aussi le jour suivant où vous allumez sur votre pc, s'il ne l'était pas le jour où _cron_ était supposé faire la sauvegarde.
+Installer _Anacrontab_ dans votre système, pour qu'il sauvegarde aussi le jour suivant où s'allumera le pc, s'il ne l'était pas le jour où _cron_ était supposé faire la sauvegarde.
 
 Exemple de fichier à placer à /etc/cron.weekly/pad ou /etc/cron.monthly/pad.
 
@@ -55,7 +55,7 @@ Code minimal :
 ```
 Plus de détails
 
-Le code est documenté, [lisez le](https://github.com/pouek/etherpad-backups/blob/main/etherpad-backups.sh) ;)
+Le code est documenté, [lis le](https://github.com/pouek/etherpad-backups/blob/main/etherpad-backups.sh) ;)
 
 
 # To-do
