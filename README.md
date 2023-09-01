@@ -1,5 +1,68 @@
 # etherpad-backups
+Script Shell pour sauvegarder vos pads publics préférés, des instances d'étherpad, automatiquement !
+
 Shell script to backup your favorite public pads, from [etherpad](https://etherpad.org/) instances, automagically !
+
+English read me below
+
+#Caractéristiques
+
+Il peut être utilisé par n'importe qui, c'est-à-dire sans droits d'administration ou identifiants, pour archiver (régulièrement ou non) vos pads préférés.
+Le nom du fichier sauvegardé est fait du nom du pad suivi de la date. Cela vous permet de suivre l'évolution de vos pads.
+Pour préserver l'espace disque, il remplacera, quand ils sont les mêmes, le pad téléchargé par un lien vers le précédent.
+Plusieurs pads de plusieurs serveurs dans un seul lancement de script.
+Fichier _config.txt_ (optionnel) pour stocker vos paramètres et les rendre facilement accessibles et modifiables.
+Exemples de serveurs etherpad, vous pouvez télécharger avec cet outil à partir de :
+https://framapad.org et ses sous-domaines annuel, mensuel, ...
+Plus d'instances listées sur chatons.org en cherchant par _services_ et en sélectionnant _text-processor_
+
+# Installer
+
+Cliquer ici pour télécharger zip.
+L'extraire, le lancer, profiter !
+
+# Utilisation
+
+Modifier le script avec tous vos paramètres :
+_filetype_ à télécharger : "odt" ou "pdf"
+_Nom d'utilisateur_, obligatoire si script a commencé par cron/anacron
+_Dossier de téléchargement_
+_Les serveurs_ à télécharger, et pour chaque serveur...
+Les _noms de Pads_ pour le télécharger depuis
+Lancez le script avec
+```
+chmod u+x etherpad-backups.sh
+```
+Mettrez à jour manuellement vos pads, donc ponctuellement.
+Note : le paramètre _manuel_ peut être ce que vous voulez, c'est une option pour aider à suivre les sauvegardes effectuées et quand elles l'ont été
+```
+./etherpad-backups.sh manuel
+```
+ou
+```
+/chemin/complet/vers/etherpad-backups.sh manuel
+```
+Ajoutez les scripts à votre _cron_ pour activer les sauvegardes automatiques de vos _etherpads_.
+
+Installez _Anacrontab_ dans votre système, pour qu'il sauvegarde aussi le jour suivant où vous allumez sur votre pc, s'il ne l'était pas le jour où _cron_ était supposé faire la sauvegarde.
+
+Exemple de fichier à placer à /etc/cron.weekly/pad ou /etc/cron.monthly/pad.
+
+Code minimal :
+```
+#!/bin/bash
+/bin/bash /home/path/to/etherpad-backups.sh automatique
+```
+Plus de détails
+
+Le code est documenté, [lisez le](https://github.com/pouek/etherpad-backups/blob/main/etherpad-backups.sh) ;)
+
+
+# To-do
+- ajouter la connexion au serveur avec utilisateur:motdepasse pour les pads privés ?
+
+
+__Read me__
 
 # Features
 - It can be used by anyone, i.e. without admin rights or any logins, to archive (regularly or not) your favorite pads.
