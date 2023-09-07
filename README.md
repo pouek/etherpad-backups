@@ -62,7 +62,7 @@ Le code est documenté, [lis le](https://github.com/pouek/etherpad-backups/blob/
 - ajouter la connexion au serveur avec utilisateur:motdepasse pour les pads privés ?
 
 
-__Read me__
+# __English read me__
 
 # Features
 - It can be used by anyone, i.e. without admin rights or any logins, to archive (regularly or not) your favorite pads.
