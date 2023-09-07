@@ -1,8 +1,6 @@
 # etherpad-backups
 Script Shell pour sauvegarder vos pads publics préférés, des instances d'étherpad, automatiquement !
 
-Shell script to backup your favorite public pads, from [etherpad](https://etherpad.org/) instances, automagically !
-
 English read me below
 
 # Caractéristiques
@@ -63,6 +61,7 @@ Le code est documenté, [lis le](https://github.com/pouek/etherpad-backups/blob/
 
 
 # __English read me__
+Shell script to backup your favorite public pads, from [etherpad](https://etherpad.org/) instances, automagically !
 
 # Features
 - It can be used by anyone, i.e. without admin rights or any logins, to archive (regularly or not) your favorite pads.
