@@ -1,7 +1,7 @@
 # etherpad-backups
 Script Shell pour sauvegarder vos pads publics préférés, des instances d'étherpad, automatiquement !
 
-[English read me below](https://github.com/pouek/etherpad-backups/blob/main/README.md#english-read-me)
+[English read-me below.](https://github.com/pouek/etherpad-backups/blob/main/README.md#english-read-me)
 
 # Caractéristiques
 
@@ -60,7 +60,7 @@ Le code est documenté, [lis le](https://github.com/pouek/etherpad-backups/blob/
 - ajouter la connexion au serveur avec utilisateur:motdepasse pour les pads privés ?
 
 
-# __English read me__
+# English read-me
 Shell script to backup your favorite public pads, from [etherpad](https://etherpad.org/) instances, automagically !
 
 # Features
