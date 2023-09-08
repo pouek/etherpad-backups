@@ -35,13 +35,12 @@ txtable="yes"
 u=$USER
 # Paths, adapt as you wish
 # /!\ keep the ending '/' !
-W_DIR="${PWD}/"
+W_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # Latest folder, to always have all your new version at hand !
-# ( The missing '/' is already in ${W_DIR} )
-LATEST="${W_DIR}latest/"
+LATEST="${W_DIR}/latest/"
 # And if you put (some of) those settings in config.txt filen
 # uncomment so it overwrites above config.
-source "${W_DIR}./config.txt"
+source "${W_DIR}/.config.txt"
 #### End of user config ####
 
 
@@ -52,7 +51,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-LOG_FILE="${W_DIR}backup-pads.log"
+LOG_FILE="${W_DIR}/backup-pads.log"
 touch "$LOG_FILE"
 export DATE="$(date '+%Y-%m-%d')"
 PRV_DATE="$(tail -n1 $LOG_FILE | cut -c -10)"
@@ -241,7 +240,7 @@ if [ "$continue" != "[Nn]"* ]; then
 			# Compare previous with new backup, keep that last one only if different
 			if [ "$symlinks" == "yes" ] ; then cmpToLn; fi
 			# link new pad in latest_pads folder
-			ln -fs "${W_DIR}""${nom}"/"${pad}""${NEW_SUFX}" "${LATEST}""${pad}"."$type" && echo "$pad linked in $LATEST"
+			ln -fs "${W_DIR}"/"${nom}"/"${pad}""${NEW_SUFX}" "${LATEST}""${pad}"."$type" && echo "$pad linked in $LATEST"
 			cd .. && sleep 10
 		done
 		cd ..
