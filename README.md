@@ -1,5 +1,5 @@
 # etherpad-backups
-Script Shell pour sauvegarder vos pads publics préférés, des instances d'étherpad, automatiquement !
+Script Shell pour sauvegarder vos pads publics préférés, d'une ou plusieurs instances d'etherpad, automatiquement !
 
 [English read-me below.](https://github.com/pouek/etherpad-backups/blob/main/README.md#english-read-me)
 
