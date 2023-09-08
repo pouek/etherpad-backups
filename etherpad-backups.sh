@@ -35,13 +35,13 @@ txtable="yes"
 u=$USER
 # Paths, adapt as you wish
 # /!\ keep the ending '/' !
-W_DIR="$PWD"/
+W_DIR="${PWD}/"
 # Latest folder, to always have all your new version at hand !
 # ( The missing '/' is already in ${W_DIR} )
 LATEST="${W_DIR}latest/"
 # And if you put (some of) those settings in config.txt filen
 # uncomment so it overwrites above config.
-# source ./config.txt
+source "${W_DIR}./config.txt"
 #### End of user config ####
 
 
@@ -56,6 +56,7 @@ LOG_FILE="${W_DIR}backup-pads.log"
 touch "$LOG_FILE"
 export DATE="$(date '+%Y-%m-%d')"
 PRV_DATE="$(tail -n1 $LOG_FILE | cut -c -10)"
+if "$PRV_DATE" == ""; then PRV_DATE=null; fi
 NEW_SUFX="_${DATE}.${type}"
 continue="y"
 
@@ -68,7 +69,6 @@ function mkcd {
 	mkdir_s "$1"
 	cd "$1"
 }
-
 ## In case odt2txt isn't available
 if [ "$symlinks" == "yes" ] && [ $type == "odt" ] && [ $(command -v otd2txt >/dev/null 2>/dev/null) ] ; then
 	txtable="no"; echo "odt2txt is needed to get odt files !"
@@ -125,7 +125,6 @@ fi
 readlink_recursive() {
     local path prev_path oldwd found_recursion >/dev/null 2>&1 ||:
     oldwd=$PWD; path=$1; found_recursion=0
-
     while [ -L "$path" ] && [ "$found_recursion" = 0 ]; do
         if [ "$path" != "${path%/*}" ]; then
           cd -- "${path%/*}" || {
@@ -158,7 +157,6 @@ readlink_recursive() {
         done
         set -- "$path" "$@" # record path for recursion check
     done
-
     if [ "$path" != "${path%/../*}" ]; then
       cd "${path%/*}" || {
         echo "ERROR: Directory '${path%/*}' does not exist in $PWD" >&2
@@ -170,7 +168,6 @@ readlink_recursive() {
     fi
     cd -- "$oldwd" ||:
 }
-
 # Thanks Charles, back to our etherpad shenanigans...
 
 # This function links to older backup versions if they are the same
@@ -186,7 +183,7 @@ cmpToLn(){
 	fi
 	case "$type" in
 		"odt") # .odt file
-			test "$txtable" -eq "no" ] && echo "Kept $new, (txtable=no)" ; return 0
+			[ "$txtable" == "no" ] && echo "Kept $new, (txtable=no)" ; return 0
 			for f in "$old" "$new"; do odt2txt "$f" --output="$f".txt; done
 			if `cmp -s "$old".txt "$new".txt`; then
 				ln -fs "$old" "$new";
@@ -215,10 +212,10 @@ if ( `pwd` != "$W_DIR" ); then mkcd "$W_DIR"; fi
 if [ "${PRV_DATE}" == "${DATE}" ] && [ "${mode}" != "update" ] ; then
 	echo "${DATE} backup already done, exiting..."
 	exit 1
-elif [ ! "${PRV_DATE}" ]; then #!!
-	echo "No previous backup found"
-	echo "Check log $LOG_FILE"
-	continue=$(read -p "Continue (Y/n)")
+#elif [ ! "${PRV_DATE}" ]; then #!!
+#	echo "No previous backup found"
+#	echo "Check log $LOG_FILE"
+#	continue=$(read -p "Continue (Y/n)")
 fi
 ## Actual download loops
 if [ "$continue" != "[Nn]"* ]; then
@@ -235,7 +232,8 @@ if [ "$continue" != "[Nn]"* ]; then
 	    l_serpad="${#serpad[*]}"
 	    declare -a pads=()
 	    for (( i=1; i<$l_serpad; i++ )); do
-			pads+=(${serpad[$i]})
+			pads+=("${serpad[$i]}")
+			echo "$pads"
 	    done
 	    for pad in ${pads[*]} ; do
 			mkcd "$pad"
@@ -258,7 +256,7 @@ fi
 sudo chown $u:$u -R $W_DIR
 
 ## Log / echo ?
-#if [ "$PRV_DATE" != "$DATE" ]; then echo "$DATE : $mode donwloads complete !" >> ${LOG_FILE};fi
+if [ "$PRV_DATE" != "$DATE" ]; then echo "$DATE : $mode donwloads complete !" >> ${LOG_FILE};fi
 # Notify job complete
 notify-send "All pads have been downloaded !"
 echo  "All pads have been downloaded !"
