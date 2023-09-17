@@ -40,7 +40,7 @@ W_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 LATEST="${W_DIR}/latest/"
 # And if you put (some of) those settings in config.txt filen
 # uncomment so it overwrites above config.
-source "${W_DIR}/.config.txt"
+source "${W_DIR}/config.txt"
 #### End of user config ####
 
 
