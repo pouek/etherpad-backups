@@ -252,7 +252,11 @@ else
 fi
 
 # Give file ownership to user, useful if started by anacron/cron
-sudo chown $u:$u -R $W_DIR
+if [ "$USER" == "root" ] ; then 
+    chown $u:$u -R $W_DIR
+else
+    sudo chown $u:$u -R $W_DIR
+fi
 
 ## Log / echo ?
 if [ "$PRV_DATE" != "$DATE" ]; then echo "$DATE : $mode donwloads complete !" >> ${LOG_FILE};fi
