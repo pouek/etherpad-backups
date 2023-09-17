@@ -230,7 +230,7 @@ if [ "$continue" != "[Nn]"* ]; then
 	    server="${serpad[0]}"
 	    l_serpad="${#serpad[*]}"
 	    declare -a pads=()
-	    for (( i=2; i<$l_serpad; i++ )); do
+	    for (( i=1; i<$l_serpad; i++ )); do
 			pads+=("${serpad[$i]}")
 			echo "$pads"
 	    done
