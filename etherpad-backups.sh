@@ -1,7 +1,7 @@
 #!/bin/bash
 # Incremental backuping of all your etherpads
 # Using symbolic links to free storage space
-# Adapt $user and $W_DIR 1st, and if you move to new home
+# Adapt "u" varirable with username and $W_DIR 1st, and if you move to new home
 # Passing "update" as an argument will force updating
 # I.E. re-downloading files
 
@@ -32,7 +32,7 @@ symlinks="yes"
 # Default, only set to no in case no odt2txt command available 
 txtable="yes"
 # Replace by real username if start by cron/anacron ( so root )
-u=$USER
+u="c"
 # Paths, adapt as you wish
 # /!\ keep the ending '/' !
 W_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -240,7 +240,7 @@ if [ "$continue" != "[Nn]"* ]; then
 			# Compare previous with new backup, keep that last one only if different
 			if [ "$symlinks" == "yes" ] ; then cmpToLn; fi
 			# link new pad in latest_pads folder
-			ln -fs "${W_DIR}"/"${nom}"/"${pad}""${NEW_SUFX}" "${LATEST}""${pad}"."$type" && echo "$pad linked in $LATEST"
+			ln -fs "${W_DIR}/${nom}/${pad}/${pad}${NEW_SUFX}" "${LATEST}${pad}"."$type" && echo "$pad linked in $LATEST"
 			cd .. && sleep 10
 		done
 		cd ..
@@ -252,7 +252,7 @@ else
 fi
 
 # Give file ownership to user, useful if started by anacron/cron
-if [ "$USER" == "root" ] ; then 
+if [ "$(whoami)" == "root" ] ; then 
     chown $u:$u -R $W_DIR
 else
     sudo chown $u:$u -R $W_DIR
@@ -261,5 +261,7 @@ fi
 ## Log / echo ?
 if [ "$PRV_DATE" != "$DATE" ]; then echo "$DATE : $mode donwloads complete !" >> ${LOG_FILE};fi
 # Notify job complete
-notify-send "All pads have been downloaded !"
+if [ "$(whoami)" != "root" ] ; then 
+    notify-send "All pads have been downloaded !"
+fi
 echo  "All pads have been downloaded !"
