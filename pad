@@ -3,4 +3,5 @@
 ## Customize your scripts' path.
 ## You can install anacrontab so it also download at next power up if 
 ## the pc wasn't on on the planned day.
-/bin/bash /home/path/to/your/etherpad-backups.sh automatic
+cd /home/c/t/i/pads/arch/
+bash etherpad-backups.sh automatic
