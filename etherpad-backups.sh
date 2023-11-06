@@ -31,8 +31,11 @@ type="odt"
 symlinks="yes"
 # Default, only set to no in case no odt2txt command available 
 txtable="yes"
-# Replace by real username if start by cron/anacron ( so root )
-u="c"
+# Replace by real username and password (sudo) if start by cron/anacron (so root)
+#u=""
+#pw=""
+
+
 # Paths, adapt as you wish
 # /!\ keep the ending '/' !
 W_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
