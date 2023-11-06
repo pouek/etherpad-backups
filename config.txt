@@ -1,6 +1,7 @@
 #!/bin/bash
 # yeah it's not a script, but it helps readability 
 # with colors in code editors...
+
 #### User config : EDIT ME ! ####
 # Your sources are stored in an associative array.
 # In shell we assign it with "array[key]=value"
@@ -27,8 +28,10 @@ type="odt"
 symlinks="yes"
 # Default, only set to no in case no odt2txt command available 
 txtable="yes"
-# Replace by real username if start by cron/anacron
-u=$USER
+# Replace by real username and password (sudo) if start by cron/anacron (so root)
+#u=""
+#pw=""
+
 # Paths, adapt as you wish
 # /!\ keep the ending '/' !
 W_DIR="$PWD"/
