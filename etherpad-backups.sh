@@ -258,7 +258,7 @@ fi
 if [ "$(whoami)" == "root" ] ; then 
     chown $u:$u -R $W_DIR
 else
-    sudo chown $u:$u -R $W_DIR
+   echo $pw | sudo chown $u:$u -R $W_DIR
 fi
 
 ## Log / echo ?
