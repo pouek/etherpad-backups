@@ -1,7 +1,8 @@
 #!/bin/bash
 # Incremental backuping of all your etherpads
 # Using symbolic links to free storage space
-# Adapt "u" varirable with username and $W_DIR 1st, and if you move to new home
+# Adapt "u" varirable with username, password (sudo)
+# and $W_DIR 1st, and if you move to new home
 # Passing "update" as an argument will force updating
 # I.E. re-downloading files
 
@@ -31,11 +32,9 @@ type="odt"
 symlinks="yes"
 # Default, only set to no in case no odt2txt command available 
 txtable="yes"
-# Replace by real username and password (sudo) if start by cron/anacron (so root)
+# Replace by real username if start by cron/anacron ( so root )
 #u=""
 #pw=""
-
-
 # Paths, adapt as you wish
 # /!\ keep the ending '/' !
 W_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -72,7 +71,7 @@ function mkcd {
 	cd "$1"
 }
 ## In case odt2txt isn't available
-if [ "$symlinks" == "yes" ] && [ $type == "odt" ] && [ $(command -v otd2txt >/dev/null 2>/dev/null) ] ; then
+if [ "$symlinks" == "yes" ] && [ "$type" == "odt" ] && [ $(command -v odt2txt >/dev/null 2>/dev/null) ] ; then
 	txtable="no"; echo "odt2txt is needed to get odt files !"
 	echo "You can quit now to install it and relaunch the script,"
 	echo 'or modify the script with symlinks="no" to disable this check.'
@@ -126,30 +125,30 @@ fi
 # readlink_recursive find latest link when links poins to links in a chain
 readlink_recursive() {
     local path prev_path oldwd found_recursion >/dev/null 2>&1 ||:
-    oldwd=$PWD; path=$1; found_recursion=0
+    oldwd="${PWD}"; path="$1"; found_recursion=0
     while [ -L "$path" ] && [ "$found_recursion" = 0 ]; do
         if [ "$path" != "${path%/*}" ]; then
           cd -- "${path%/*}" || {
             cd -- "$oldwd" ||:
-            echo "ERROR: Directory '${path%/*}' does not exist in '$PWD'" >&2
+            echo "ERROR: Directory '${path%/*}' does not exist in '${PWD}'" >&2
             return 1
           }
-          path=${PWD}/${path##*/}
+          path="${PWD}/${path##*/}"
         fi
         path=$(readlink "$path")
         if [ -d "$path" ]; then
           cd -- "$path"
-          path=$PWD
+          path="${PWD}"
           break
         fi
         if [ "$path" != "${path%/*}" ]; then
           cd -- "${path%/*}" || {
-            echo "ERROR: Could not traverse from $PWD to ${path%/*}" >&2
+            echo "ERROR: Could not traverse from ${PWD} to ${path%/*}" >&2
             return 1
           }
-          path=${PWD}/${path##*/}
-        elif [ "$PWD" != "$oldwd" ]; then
-          path=${PWD}/$path
+          path="${PWD}/${path##*/}"
+        elif [ "${PWD}" != "$oldwd" ]; then
+          path="${PWD}/$path"
         fi
         for prev_path; do
           if [ "$path" = "$prev_path" ]; then
@@ -161,10 +160,10 @@ readlink_recursive() {
     done
     if [ "$path" != "${path%/../*}" ]; then
       cd "${path%/*}" || {
-        echo "ERROR: Directory '${path%/*}' does not exist in $PWD" >&2
+        echo "ERROR: Directory '${path%/*}' does not exist in ${PWD}" >&2
         return 1
       }
-      printf '%s\n' "$PWD/${path##*/}"
+      printf '%s\n' "${PWD}/${path##*/}"
     else
       printf '%s\n' "$path"
     fi
@@ -177,18 +176,19 @@ readlink_recursive() {
 # Delete previous backup if it was already a symlink to an identic backup
 cmpToLn(){
 	test "$(ls | wc -w)" -lt 2 && return 0
-	old=$(ls -t *."$type"|head -n2|tail -n1)
-	new=$(ls -t *."$type"|head -n1)
+	old=$(ls -r *."$type"|head -n2|tail -n1)
+	new=$(ls -r *."$type"|head -n1)
 	oldest=$(readlink_recursive "$old")
 	if [ "$oldest" != "$old" ] ; then
-		rm "$old"; old="$oldest"; echo "$old link deleted. (Both $old and $new points to $oldest)"
+		rm "$old"; old="$oldest"; echo "$old link deleted. (Both $old and $new point to $oldest)"
 	fi
 	case "$type" in
 		"odt") # .odt file
-			[ "$txtable" == "no" ] && echo "Kept $new, (txtable=no)" ; return 0
+			[ "$txtable" == "no" ] && echo "Kept $new, (txtable=no)" && return 0
 			for f in "$old" "$new"; do odt2txt "$f" --output="$f".txt; done
 			if `cmp -s "$old".txt "$new".txt`; then
-				ln -fs "$old" "$new";
+				rm "$new"
+				ln -fs "$old" "$new"
 				echo "$new linked to $old, as they are the same"
 				rm "$old".txt "$new".txt
 			else
@@ -197,7 +197,8 @@ cmpToLn(){
 		;;
 		"pdf") # .pdf file
 			if `cmp -s "$old" "$new"`; then
-				ln -fs "$old" "$new";
+				rm "$new"
+				ln -fs "$old" "$new"
 				echo "$new linked to $old, as they are the same"
 			else
 				echo "$new is a new version"
@@ -213,6 +214,7 @@ if ( `pwd` != "$W_DIR" ); then mkcd "$W_DIR"; fi
 ## Update ? (For logs purposes, no big deal)
 if [ "${PRV_DATE}" == "${DATE}" ] && [ "${mode}" != "update" ] ; then
 	echo "${DATE} backup already done, exiting..."
+	echo 'Restart with "update" parameter to force updating previous update'
 	exit 1
 #elif [ ! "${PRV_DATE}" ]; then #!!
 #	echo "No previous backup found"
@@ -256,9 +258,9 @@ fi
 
 # Give file ownership to user, useful if started by anacron/cron
 if [ "$(whoami)" == "root" ] ; then 
-    chown $u:$u -R $W_DIR
+    chown $u:$u -R "$W_DIR"
 else
-   echo $pw | sudo chown $u:$u -R $W_DIR
+    echo $pw | sudo chown $u:$u -R "$W_DIR"
 fi
 
 ## Log / echo ?
