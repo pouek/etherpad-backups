@@ -56,7 +56,7 @@ Plus de détails
 Le code est documenté, [lis le](https://github.com/pouek/etherpad-backups/blob/main/etherpad-backups.sh) ;)
 
 
-# To-do
+# À faire
 - ajouter la connexion au serveur avec utilisateur:motdepasse pour les pads privés ?
 
 
