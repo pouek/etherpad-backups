@@ -185,7 +185,9 @@ cmpToLn(){
 	case "$type" in
 		"odt") # .odt file
 			[ "$txtable" == "no" ] && echo "Kept $new, (txtable=no)" && return 0
-			for f in "$old" "$new"; do odt2txt "$f" --output="$f".txt; done
+   			# Convert files to txt to allow checking if contents are the same
+      			# return 0 in case of corrupted older file, and so only keeping the newly downloaded file
+			for f in "$old" "$new"; do odt2txt "$f" --output="$f".txt || return 0; done
 			if `cmp -s "$old".txt "$new".txt`; then
 				rm "$new"
 				ln -fs "$old" "$new"
